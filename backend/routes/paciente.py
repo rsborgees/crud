@@ -12,8 +12,8 @@ def criar_paciente(paciente: Paciente):
     cursor = connection.cursor()
 
     cursor.execute(
-        "INSERT INTO pacientes (nome, telefone) VALUES (%s, %s)",
-        (paciente.nome, paciente.telefone)
+        "INSERT INTO pacientes (nome, email, telefone, data_nascimento) VALUES (%s, %s, %s, %s)",
+        (paciente.nome, paciente.email, paciente.telefone, paciente.data_nascimento)
     )
 
     connection.commit()
@@ -22,7 +22,9 @@ def criar_paciente(paciente: Paciente):
     
     return {
         "nome": paciente.nome,
-        "telefone": paciente.telefone
+        "email": paciente.email,
+        "telefone": paciente.telefone,
+        "data_nascimento": paciente.data_nascimento
     }
 
 # Rota para atualizar um paciente existente
@@ -33,8 +35,8 @@ def atualizar_paciente(id: int, paciente: Paciente):
     cursor = connection.cursor()
 
     cursor.execute(
-        "UPDATE pacientes SET nome=%s, telefone=%s WHERE idPaciente=%s",
-        (paciente.nome, paciente.telefone, id)
+        "UPDATE pacientes SET nome=%s, email=%s, telefone=%s, data_nascimento=%s WHERE idPaciente=%s",
+        (paciente.nome, paciente.email, paciente.telefone, paciente.data_nascimento, id)
     )
 
     connection.commit()
@@ -52,7 +54,9 @@ def atualizar_paciente(id: int, paciente: Paciente):
 
     return {
         "nome": paciente.nome,
-        "telefone": paciente.telefone
+        "email": paciente.email,
+        "telefone": paciente.telefone,
+        "data_nascimento": paciente.data_nascimento
     }
 
 # Rota para obter um paciente por nome
@@ -63,7 +67,7 @@ def obter_paciente(id: int):
     cursor = connection.cursor()
 
     cursor.execute(
-        "SELECT * FROM pacientes WHERE idPaciente=%s",
+        "SELECT idPaciente, nome, email, telefone, data_nascimento FROM pacientes WHERE idPaciente=%s",
         (id,)
     )
 
@@ -77,7 +81,9 @@ def obter_paciente(id: int):
     return {
         "id": paciente[0],
         "nome": paciente[1],
-        "telefone": paciente[2]
+        "email": paciente[2],
+        "telefone": paciente[3],
+        "data_nascimento": paciente[4]
     }
 
   # Rota para obter todos os pacientes
@@ -88,7 +94,7 @@ def obter_pacientes():
     cursor = connection.cursor()
 
     cursor.execute(
-        "SELECT * FROM pacientes",
+        "SELECT idPaciente, nome, email, telefone, data_nascimento FROM pacientes",
     )
 
     pacientes = cursor.fetchall()
@@ -100,7 +106,9 @@ def obter_pacientes():
         {
             "id": p[0],
             "nome": p[1],
-            "telefone": p[2]
+            "email": p[2],
+            "telefone": p[3],
+            "data_nascimento": p[4]
         }
         for p in pacientes
     ]
