@@ -102,20 +102,3 @@ npm run dev
 ```
 
 Depois abra no navegador o endereço exibido pelo Vite, geralmente `http://localhost:5173`.
-
-## Observações
-
-- O frontend consome a API em `http://localhost:5000`.
-- O backend permite requisições CORS do frontend local.
-- Os formulários de paciente usam `email`, `telefone` e `data_nascimento`.
-- Os agendamentos podem ser criados, listados e cancelados.
-
-## Ajustes possíveis
-
-- adicionar status para agendamento (`pendente`, `concluído`, `cancelado`)
-- criar atualização de registros de médicos e pacientes pelo frontend
-- implementar autenticação
-
----
-
-Se quiser, posso também incluir um script de criação automática das tabelas no banco ou um `requirements.txt` para o backend.
