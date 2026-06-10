@@ -1,6 +1,6 @@
 from fastapi import APIRouter
-from database import get_connection
-from models import Paciente
+from ..database import get_connection
+from ..models import Paciente
 
 router = APIRouter()
 
@@ -38,9 +38,18 @@ def atualizar_paciente(id: int, paciente: Paciente):
     )
 
     connection.commit()
+
+    if cursor.rowcount == 0:
+        cursor.close()
+        connection.close()
+         
+        return {
+            "message": "Paciente não encontrado"
+        }
+
     cursor.close()
     connection.close()
-    
+
     return {
         "nome": paciente.nome,
         "telefone": paciente.telefone
@@ -61,7 +70,7 @@ def obter_paciente(id: int):
     paciente = cursor.fetchone()
     cursor.close()
     connection.close()
-
+    
     if not paciente:
         return {"error": "Paciente não encontrado"}
 
@@ -95,3 +104,33 @@ def obter_pacientes():
         }
         for p in pacientes
     ]
+
+  # Rota para deletar um paciente por id
+
+@router.delete("/pacientes/{id}")
+def deletar_pacientes(id: int):
+    connection = get_connection()
+    cursor = connection.cursor()
+
+    cursor.execute(
+        "DELETE FROM pacientes WHERE idPaciente=%s",
+        (id,)
+    )
+
+    connection.commit()
+    
+    # Verifica se alguma linha foi deletada
+    if cursor.rowcount == 0:
+        cursor.close()
+        connection.close()
+        return {
+            "message": "Nenhum paciente encontrado"
+        }
+    
+    cursor.close()
+    connection.close()
+
+    return {
+        "message": "Paciente deletado com sucesso"
+    }
+

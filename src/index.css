@@ -1,0 +1,123 @@
+﻿:root {
+  color-scheme: light;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #f7f8fc;
+  color: #111827;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: #f7f8fc;
+  color: #111827;
+}
+
+button, input, textarea, select {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  width: min(1180px, calc(100% - 36px));
+  margin: 0 auto;
+}
+
+.app-header,
+.app-footer {
+  background: #0f172a;
+  color: #ffffff;
+  padding: 20px 0;
+}
+
+.app-header h1,
+.app-footer p {
+  margin: 0;
+}
+
+.app-main {
+  padding: 32px 0;
+}
+
+.page-title {
+  margin: 0 0 16px;
+  font-size: clamp(2rem, 2.5vw, 2.5rem);
+}
+
+.page-description {
+  margin: 0 0 28px;
+  color: #475569;
+}
+
+.card-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.card {
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  padding: 22px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+}
+
+.card h3 {
+  margin-top: 0;
+}
+
+.navbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 12px;
+}
+
+.navbar a {
+  color: #ffffff;
+  background: #2563eb;
+  padding: 10px 16px;
+  border-radius: 999px;
+  transition: background 0.2s ease;
+}
+
+.navbar a:hover {
+  background: #1d4ed8;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+}
+
+.table th,
+.table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #e2e8f0;
+  text-align: left;
+}
+
+.table th {
+  background: #f8fafc;
+}
+
+.empty-state {
+  padding: 24px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  color: #475569;
+}
